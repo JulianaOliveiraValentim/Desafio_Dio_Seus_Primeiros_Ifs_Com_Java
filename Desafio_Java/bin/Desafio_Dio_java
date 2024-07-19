@@ -1,0 +1,40 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+public class CalculoSalario {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Entrada dos valores
+        System.out.println("Digite o valor bruto do salário:");
+        double salarioBruto = scanner.nextDouble();
+        
+        System.out.println("Digite o valor do adicional dos benefícios:");
+        double beneficios = scanner.nextDouble();
+        
+        // Calcular o salário líquido
+        double salarioLiquido = calcularSalarioLiquido(salarioBruto, beneficios);
+        
+        // Formatar e imprimir o resultado
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Salário a ser transferido: " + df.format(salarioLiquido));
+    }
+    
+    public static double calcularSalarioLiquido(double salarioBruto, double beneficios) {
+        double imposto = calcularImposto(salarioBruto);
+        double salarioLiquido = salarioBruto - imposto + beneficios;
+        return salarioLiquido;
+    }
+    
+    public static double calcularImposto(double salarioBruto) {
+        double percentualImposto;
+        if (salarioBruto <= 1100.00) {
+            percentualImposto = 0.05;
+        } else if (salarioBruto <= 2500.00) {
+            percentualImposto = 0.10;
+        } else {
+            percentualImposto = 0.15;
+        }
+        return salarioBruto * percentualImposto;
+    }
+}
